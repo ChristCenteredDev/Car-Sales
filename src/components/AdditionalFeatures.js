@@ -5,9 +5,9 @@ const AdditionalFeatures = props => {
   return (
     <div className='content'>
       <h4>Additional Features</h4>
-      {props.applicationStore.length ? (
+      {props.store.length ? (
         <ol type='1'>
-          {props.applicationStore.map(item => (
+          {props.store.map(item => (
             <AdditionalFeature
               key={item.id}
               feature={item}

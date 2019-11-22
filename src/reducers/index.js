@@ -1,6 +1,6 @@
 import { REMOVE_FEATURE, BUY_ITEM } from '../actions';
 
-export const initialState = {
+const initialState = {
   additionalPrice: 0,
   car: {
     price: 26395,
@@ -9,7 +9,7 @@ export const initialState = {
       'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
     features: []
   },
-  additionalFeatures: [
+  store: [
     { id: 1, name: 'V-6 engine', price: 1500 },
     { id: 2, name: 'Racing detail package', price: 1500 },
     { id: 3, name: 'Premium sound system', price: 500 },
@@ -19,13 +19,27 @@ export const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case REMOVE_FEATURE:
-      return {
-        // Add here
-      };
     case BUY_ITEM:
       return {
-        // Add here
+        ...state,
+        additionalPrice: (state.additionalPrice += action.payload.price),
+        car: {
+          ...state.car,
+          features: [...state.car.features, action.payload]
+        }
+      };
+    case REMOVE_FEATURE:
+      return {
+        ...state,
+        additionalPrice: (state.additionalPrice -= action.payload.price),
+        car: {
+          ...state.car,
+          features: state.car.features.filter(cv => {
+            if (cv.id != action.payload.id) {
+              return cv;
+            }
+          })
+        }
       };
     default:
       return state;

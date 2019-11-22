@@ -9,11 +9,11 @@ import { reducer } from './reducers';
 import 'bulma/css/bulma.css';
 import './styles.scss';
 
-const applicationStore = createStore(reducer);
+const store = createStore(reducer);
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-  <Provider store={applicationStore}>
+  <Provider store={store}>
     <App />
   </Provider>,
   rootElement
